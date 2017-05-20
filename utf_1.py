@@ -125,13 +125,6 @@ class IncrementalDecoder(codecs.IncrementalDecoder):
         self.state = state
 
 
-class StreamReader(Codec, codecs.StreamReader):
-    pass
-
-
-class StreamWriter(Codec, codecs.StreamWriter):
-    pass
-
 ### encodings module API
 
 _REGENTRY = codecs.CodecInfo(
@@ -139,9 +132,7 @@ _REGENTRY = codecs.CodecInfo(
     encode=Codec().encode,
     decode=Codec().decode,
     incrementalencoder=IncrementalEncoder,
-    incrementaldecoder=IncrementalDecoder,
-    streamreader=StreamReader,
-    streamwriter=StreamWriter
+    incrementaldecoder=IncrementalDecoder
 )
 _ALIASES = ('1', 'utf1', 'utf_1')
 _REGENTRY_MAPPING = dict.fromkeys(_ALIASES, _REGENTRY)
@@ -155,7 +146,7 @@ def getaliases():
     return _ALIASES
 
 
-def search_fn(encoding):
+def search_function(encoding):
     return _REGENTRY_MAPPING.get(encodings.normalize_encoding(encoding))
 
-codecs.register(search_fn)
+codecs.register(search_function)
