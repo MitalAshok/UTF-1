@@ -8,7 +8,7 @@ Also note: This was just an excersice to learn bit manipulation. Will not be pro
 
 ## Python usage
 
-Import `UTF_1`, or place `UTF_1` in `$PYTHON_DIRECTORY/lib/encodings`.
+Import `utf_1`, or place `utf_1` in `$PYTHON_DIRECTORY/lib/encodings`.
 
 Then, just `'Arbitrary string'.encode('UTF-1')`, and `b'UTF-1 encoded byte string'.decode('UTF-1')`.
 
