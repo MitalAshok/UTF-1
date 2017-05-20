@@ -143,12 +143,8 @@ _REGENTRY = codecs.CodecInfo(
     streamreader=StreamReader,
     streamwriter=StreamWriter
 )
-
-_REGENTRY_MAPPING = {
-    'utf_1': _REGENTRY,
-    'utf1': _REGENTRY,
-    '1': _REGENTRY
-}.get
+_ALIASES = ('1', 'utf1', 'utf_1')
+_REGENTRY_MAPPING = dict.fromkeys(_ALIASES, _REGENTRY)
 
 
 def getregentry():
@@ -156,10 +152,10 @@ def getregentry():
 
 
 def getaliases():
-    return ['1', 'utf1', 'utf_1']
+    return _ALIASES
 
 
 def search_fn(encoding):
-    return _REGENTRY_MAPPING(encodings.normalize_encoding(encoding))
+    return _REGENTRY_MAPPING.get(encodings.normalize_encoding(encoding))
 
 codecs.register(search_fn)
